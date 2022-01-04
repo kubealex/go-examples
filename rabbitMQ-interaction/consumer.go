@@ -13,11 +13,11 @@ func failOnError(err error, msg string) {
 }
 
 func main() {
-	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
+	socket, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
 	failOnError(err, "Failed to connect to RabbitMQ")
-	defer conn.Close()
+	defer socket.Close()
 
-	ch, err := conn.Channel()
+	ch, err := socket.Channel()
 	failOnError(err, "Failed to open a channel")
 	defer ch.Close()
 
