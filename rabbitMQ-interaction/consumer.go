@@ -3,6 +3,8 @@ package main
 import (
 	"log"
 
+	"rabbit_utils"
+
 	amqp "github.com/rabbitmq/amqp091-go"
 )
 
@@ -13,7 +15,8 @@ func failOnError(err error, msg string) {
 }
 
 func main() {
-	socket, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
+
+	socket, err := amqp.Dial(rabbit_utils.GetConnectionString())
 	failOnError(err, "Failed to connect to RabbitMQ")
 	defer socket.Close()
 
