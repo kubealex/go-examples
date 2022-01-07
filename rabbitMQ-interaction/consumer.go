@@ -21,7 +21,7 @@ func main() {
 	failOnError(err, "Failed to open a channel")
 	defer channel.Close()
 
-	queue, err := ch.QueueDeclare(
+	queue, err := channel.QueueDeclare(
 		"hello", // name
 		false,   // durable
 		false,   // delete when unused
