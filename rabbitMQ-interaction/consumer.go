@@ -17,11 +17,11 @@ func main() {
 	failOnError(err, "Failed to connect to RabbitMQ")
 	defer socket.Close()
 
-	ch, err := socket.Channel()
+	channel, err := socket.Channel()
 	failOnError(err, "Failed to open a channel")
-	defer ch.Close()
+	defer channel.Close()
 
-	q, err := ch.QueueDeclare(
+	queue, err := ch.QueueDeclare(
 		"hello", // name
 		false,   // durable
 		false,   // delete when unused
@@ -31,22 +31,22 @@ func main() {
 	)
 	failOnError(err, "Failed to declare a queue")
 
-	msgs, err := ch.Consume(
-		q.Name, // queue
-		"",     // consumer
-		true,   // auto-ack
-		false,  // exclusive
-		false,  // no-local
-		false,  // no-wait
-		nil,    // args
+	msgs, err := channel.Consume(
+		queue.Name, // queue
+		"",         // consumer
+		true,       // auto-ack
+		false,      // exclusive
+		false,      // no-local
+		false,      // no-wait
+		nil,        // args
 	)
 	failOnError(err, "Failed to register a consumer")
 
 	forever := make(chan bool)
 
 	go func() {
-		for d := range msgs {
-			log.Printf("Received a message: %s", d.Body)
+		for msg := range msgs {
+			log.Printf("Received a message: %s", msg.Body)
 		}
 	}()
 
