@@ -11,14 +11,22 @@ type rabbitmq struct {
 	port     string
 }
 
+func getEnv(key, defaultValue string) string {
+	value := os.Getenv(key)
+	if len(value) == 0 {
+		return defaultValue
+	}
+	return value
+}
+
 func GetConnectionString() string {
 	var rabbit_connection string
 
 	rabbitConfig := rabbitmq{
-		username: os.Getenv("RABBITMQ_USERNAME"),
-		password: os.Getenv("RABBITMQ_PASSWORD"),
-		host:     os.Getenv("RABBITMQ_HOST"),
-		port:     os.Getenv("RABBITMQ_PORT"),
+		username: getEnv("RABBITMQ_USERNAME", "guest"),
+		password: getEnv("RABBITMQ_PASSWORD", "guest"),
+		host:     getEnv("RABBITMQ_HOST", "localhost"),
+		port:     getEnv("RABBITMQ_PORT", "5672"),
 	}
 	rabbit_connection = "amqp://" + rabbitConfig.username + ":" + rabbitConfig.password + "@" + rabbitConfig.host + ":" + rabbitConfig.port + "/"
 	return rabbit_connection
