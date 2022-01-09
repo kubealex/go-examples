@@ -21,7 +21,6 @@ func getEnv(key, defaultValue string) string {
 
 func GetConnectionString() string {
 	var rabbit_connection string
-
 	rabbitConfig := rabbitmq{
 		username: getEnv("RABBITMQ_USERNAME", "guest"),
 		password: getEnv("RABBITMQ_PASSWORD", "guest"),
