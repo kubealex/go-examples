@@ -48,4 +48,5 @@ func main() {
 	// Printing the values stored
 	// in the struct using pointer
 	fmt.Println(shape3)
+	
 }
