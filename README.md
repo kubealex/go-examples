@@ -6,3 +6,4 @@ Repo for golang samples:
 - Simple event handler for CloudEvents
 - Simple producer/consumer for RabbitMQ
 - Struct pointer example 
+- 
