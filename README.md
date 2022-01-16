@@ -7,3 +7,4 @@ Repo for golang samples:
 - Simple producer/consumer for RabbitMQ
 - Struct pointer example 
 - Simple metrics for Prometheus
+
