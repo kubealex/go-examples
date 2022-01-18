@@ -2,7 +2,7 @@
 
 Repo for golang samples:
 
-- Simple webserver serving on $ENV port
+- Simple webserver with environment variables
 - Simple event handler for CloudEvents
 - Simple producer/consumer for RabbitMQ
 - Struct pointer example 
